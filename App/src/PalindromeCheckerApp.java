@@ -1,5 +1,5 @@
 /*
- *UC3
+ *UC4
  *@author Apoorv
  * Date:26/02/26
  *REG:RA2411026010268
@@ -7,19 +7,23 @@
 import java.util.*;
 public class PalindromeCheckerApp {
     public static void main(String[] args){
-        String word="madam";
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter a word: ");
+        String word = sc.nextLine();
         boolean isPalindrome=true;
 
-        int n=word.length()-1;
-        int start=0;
-        for(int i=n;i>0;i--)
-        {
-            if(word.charAt(i)!=word.charAt(start))
-            {
-                isPalindrome=false;
+        int start = 0;
+        int end = word.length() - 1;
+
+        while (start < end) {
+            if (word.charAt(start) != word.charAt(end)) {
+                isPalindrome = false;
                 break;
             }
             start++;
+            end--;
         }
         if(isPalindrome)
         {
@@ -27,7 +31,8 @@ public class PalindromeCheckerApp {
         }
         else
         {
-            System.out.println(word+"is not a Palindrome");
+            System.out.println(word+" is NOT a Palindrome");
         }
+        sc.close();
     }
 }

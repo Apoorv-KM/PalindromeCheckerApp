@@ -1,38 +1,37 @@
-/*
- *UC4
- *@author Apoorv
- * Date:26/02/26
- *REG:RA2411026010268
- */
-import java.util.*;
+import java.util.Scanner;
+import java.util.Stack;
+
 public class PalindromeCheckerApp {
-    public static void main(String[] args){
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
 
-        Scanner sc = new Scanner(System.in);
+        System.out.print("Input text: ");
+        String input = scanner.nextLine();
 
-        System.out.print("Enter a word: ");
-        String word = sc.nextLine();
-        boolean isPalindrome=true;
+        boolean result = isPalindrome(input);
 
-        int start = 0;
-        int end = word.length() - 1;
+        System.out.println("Is it a Palindrome? : " + result);
 
-        while (start < end) {
-            if (word.charAt(start) != word.charAt(end)) {
-                isPalindrome = false;
-                break;
+        scanner.close();
+    }
+
+    public static boolean isPalindrome(String input) {
+        if (input == null || input.isEmpty()) return false;
+
+        String clean = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+
+        Stack<Character> stack = new Stack<>();
+
+        for (char c : clean.toCharArray()) {
+            stack.push(c);
+        }
+
+        for (char c : clean.toCharArray()) {
+            if (c != stack.pop()) {
+                return false;
             }
-            start++;
-            end--;
         }
-        if(isPalindrome)
-        {
-            System.out.println(word+" is a Palindrome");
-        }
-        else
-        {
-            System.out.println(word+" is NOT a Palindrome");
-        }
-        sc.close();
+
+        return true;
     }
 }

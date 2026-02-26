@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -21,13 +23,15 @@ public class PalindromeCheckerApp {
         String clean = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
 
         Stack<Character> stack = new Stack<>();
+        Queue<Character> queue = new LinkedList<>();
 
         for (char c : clean.toCharArray()) {
             stack.push(c);
+            queue.add(c);
         }
 
-        for (char c : clean.toCharArray()) {
-            if (c != stack.pop()) {
+        while (!stack.isEmpty()) {
+            if (!stack.pop().equals(queue.poll())) {
                 return false;
             }
         }

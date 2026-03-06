@@ -19,9 +19,11 @@ public class PalindromeCheckerApp {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Enter a string: ");
-        String input = scanner.nextLine().toLowerCase();
+        String input = scanner.nextLine();
 
-        boolean result = isPalindrome(input, 0, input.length();
+        String normalized = input.replaceAll("\\s+", "").toLowerCase();
+
+        boolean result = isPalindrome(normalized, 0, normalized.length() - 1);
 
         if (result) {
             System.out.println("The string is a Palindrome.");

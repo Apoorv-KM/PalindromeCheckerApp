@@ -1,41 +1,42 @@
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Scanner;
-import java.util.Stack;
 
 public class PalindromeCheckerApp {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.print("Input text: ");
-        String input = scanner.nextLine();
-
-        boolean result = isPalindrome(input);
-
-        System.out.println("Is it a Palindrome? : " + result);
-
-        scanner.close();
-    }
 
     public static boolean isPalindrome(String input) {
-        if (input == null || input.isEmpty()) return false;
+        Deque<Character> deque = new ArrayDeque<>();
 
-        String clean = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
-
-        Stack<Character> stack = new Stack<>();
-        Queue<Character> queue = new LinkedList<>();
-
-        for (char c : clean.toCharArray()) {
-            stack.push(c);
-            queue.add(c);
+        // Insert characters into deque
+        for (char c : input.toCharArray()) {
+            deque.addLast(Character.toLowerCase(c));
         }
 
-        while (!stack.isEmpty()) {
-            if (!stack.pop().equals(queue.poll())) {
+        // Compare front and rear
+        while (deque.size() > 1) {
+            char front = deque.removeFirst();
+            char rear = deque.removeLast();
+
+            if (front != rear) {
                 return false;
             }
         }
 
         return true;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter a string: ");
+        String input = scanner.nextLine();
+
+        if (isPalindrome(input)) {
+            System.out.println("The string is a Palindrome.");
+        } else {
+            System.out.println("The string is NOT a Palindrome.");
+        }
+
+        scanner.close();
     }
 }

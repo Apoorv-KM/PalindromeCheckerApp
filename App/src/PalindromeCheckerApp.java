@@ -1,39 +1,29 @@
-import java.util.LinkedList;
 import java.util.Scanner;
 
 public class PalindromeCheckerApp {
 
-    public static boolean isPalindrome(String input) {
-        LinkedList<Character> list = new LinkedList<>();
+    public static boolean isPalindrome(String str, int start, int end) {
 
-        // Insert characters into deque
-        for (char c : input.toLowerCase().toCharArray()) {
-            list.add(c);
+        if (start >= end) {
+            return true;
         }
 
-        int size = list.size();
-        int mid = size / 2;
-
-        LinkedList<Character> secondHalf = new LinkedList<>();
-        for(int i = size - 1; i >= mid; i--){
-            secondHalf.add(list.get(i));
+        if (str.charAt(start) != str.charAt(end)) {
+            return false;
         }
 
-        for(int i = 0; i < mid; i++){
-            if(list.get(i) != secondHalf.get(i)){
-                return false;
-            }
-        }
-        return true;
+        return isPalindrome(str,start+1,end-1);
     }
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Enter a string: ");
-        String input = scanner.nextLine();
+        String input = scanner.nextLine().toLowerCase();
 
-        if (isPalindrome(input)) {
+        boolean result = isPalindrome(input, 0, input.length();
+
+        if (result) {
             System.out.println("The string is a Palindrome.");
         } else {
             System.out.println("The string is NOT a Palindrome.");
